@@ -1,0 +1,51 @@
+# Command line setting for network
+# Connect to Wi-Fi From Terminal on Ubuntu 18.04/19.10 with WPA Supplicant
+https://www.linuxbabe.com/ubuntu/connect-to-wi-fi-from-terminal-on-ubuntu-18-04-19-04-with-wpa-supplicant
+
+
+# Raspberry pi command line
+
+## keyboard setup
+
+sudo dpkg-reconfigure console-setup
+sudo dpkg-reconfigure keyboard-configuration
+
+sudo locale -a 
+
+
+
+sudo rfkill list all
+sudo rfkill unblock wifi
+
+sudo ifconfig wlan0 up
+
+iwconfig
+
+
+sudo iwlist wlan0 scan | grep ESSID
+
+
+sudo apt install wpasupplicant
+
+wpa_passphrase your-ESSID your-wifi-passphrase | sudo tee /etc/wpa_supplicant.conf
+
+
+sudo wpa_supplicant -c /etc/wpa_supplicant.conf -i wlan0
+
+sudo systemctl stop NetworkManager
+
+# disable NeworkManager auto-start at boot time by executing the following command.
+sudo systemctl disable NetworkManager-wait-online NetworkManager-dispatcher NetworkManager
+
+sudo wpa_supplicant -B -c /etc/wpa_supplicant.conf -i wlp4s0
+
+# ip address assignged
+sudo dhclient wlan0
+
+ip addr show wlan0
+
+
+# To release the private IP address
+sudo dhclient wlan0 -r
+
+...
