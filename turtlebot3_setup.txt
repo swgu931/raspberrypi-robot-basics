@@ -1,7 +1,44 @@
 # Turtlebot3 setup
 
+## on Remote PC
+
+sudo apt install python3-colcon-common-extensions
+
+curl -sSL http://get.gazebosim.org | sh
+### Uninstall Gazebo11 if installed previously
+sudo apt remove gazebo11 libgazebo11-dev
+sudo apt install gazebo9 libgazebo9-dev
+sudo apt install ros-dashing-gazebo-ros-pkgs
+
+sudo apt install ros-dashing-cartographer
+sudo apt install ros-dashing-cartographer-ros
+
+sudo apt install ros-dashing-navigation2
+sudo apt install ros-dashing-nav2-bringup
+
+sudo apt install python3-vcstool
+
+mkdir -p ~/turtlebot3_ws/src
+cd ~/turtlebot3_ws
+wget https://raw.githubusercontent.com/ROBOTIS-GIT/turtlebot3/ros2/turtlebot3.repos
+vcs import src < turtlebot3.repos
+colcon build --symlink-install
+
+echo 'source ~/turtlebot3_ws/install/setup.bash' >> ~/.bashrc
+echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc
+source ~/.bashrc
+
+## Download and Install Ubuntu Image File into TurtleBot3
+
+### go to http://old-releases.ubuntu.com/releases/18.04.3/
+### download ubuntu-18.04.3-preinstalled-server-arm64+raspi3.img.xz
+### Burn the Ubuntu image file to a microSD card.
+
+### *TurtleBot3 is a mobile robot to run SLAM and Navigation2 using wireless network, 
+### so that connecting TurtleBot3 to Wifi is recommanded.
 
 ## Network Configuration for Raspberry-pi on Turtlebot3
+
 $ sudo touch /etc/netplan/99-netcfg.yaml
 $ sudo vi /etc/netplan/99-netcfg.yaml
 
