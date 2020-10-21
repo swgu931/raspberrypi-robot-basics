@@ -1,0 +1,16 @@
+# Turtlebot3 Bringup
+## ref: https://emanual.robotis.com/docs/en/platform/turtlebot3/ros2_bringup/#bringup-turtlebot3
+
+## open the terminal on Turtlebot3
+
+TB3_MODEL=burger
+export TURTLEBOT3_MODEL=${TB3_MODEL}
+ros2 launch turtlebot3_bringup robot.launch.py
+
+## 
+ros2 topic list
+ros2 service list
+
+
+## on Remote PC
+ros2 launch turtlebot3_bringup rviz2.launch.py
